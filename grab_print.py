@@ -23,9 +23,15 @@ switch_OIDS = {
     "Uptime"        : "1.3.6.1.2.1.1.3.0" ,   # sysUpTime
     "PortCount"     : "1.3.6.1.2.1.17.1.2.0", # dot1dBaseNumPorts
 }
+#######################################################################################
+#Config
 
-end_num = 11
-front_num = '10.30.129.'
+end_num = 11               #What number should it start with?
+front_num = '10.30.129.'   #Fill with the front part of the VLAN IP
+iterations = 24            #How many Ips should it look through, starting with end_num
+
+#End-config
+#######################################################################################
 PRINTER_IP = ''
 COMMUNITY = 'public'
 
@@ -64,7 +70,7 @@ def display_val(val_to_grab, is_printer): #Grabs the OID in a way that if it fai
 while True:
     end_num = 11
     printers.clear()
-    for i in range(25):
+    for i in range(iterations + 1):
         PRINTER_IP = f'{front_num}{end_num}'
         try:
             to_append = {"name":display_val("host_name", True), 
